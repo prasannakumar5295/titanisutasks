@@ -1,8 +1,8 @@
 import './App.css'
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Sidebar from './Sidebar';
-import Todolist from './Todolist';
+import Sidebar from './tasks/Sidebar';
+import Todolist from './tasks/Todolist';
 import Header from './Header';
 const Task2 = () => <h1 className="task">About Page</h1>;
 const Task3 = () => <h1 className="task">Contact Page</h1>;

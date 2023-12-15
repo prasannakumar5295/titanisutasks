@@ -1,11 +1,13 @@
-import './App.css'
+import './css/App.css'
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Sidebar from './tasks/Sidebar';
 import Todolist from './tasks/Todolist';
 import Header from './Header';
-const Task2 = () => <h1 className="task">About Page</h1>;
-const Task3 = () => <h1 className="task">Contact Page</h1>;
+import Jsondata from './tasks/Jsondata';
+import BMICalculator from './tasks/Bmicalculator';
+import TableData from './tasks/Tabledata';
+import Userdata from './json files/users'
 
 function App() {
   return (
@@ -18,9 +20,11 @@ function App() {
 
         <div style={{ marginLeft: '250px', padding: '20px' }}>
           <Routes>
-            <Route path="/Task1" element={<Todolist />} />
-            <Route path="/Task2" element={<Task2 />} />
-            <Route path="/Task3" element={<Task3 />} />
+            <Route path="/Todo" element={<Todolist />} />
+            <Route path="/Jsondata" element={<Jsondata/>} />
+            <Route path="/Bmicalculator" element={<BMICalculator />} />
+            <Route path="/TableData" element={<TableData users={Userdata}/>} />
+
           </Routes>
         </div>
       </div>

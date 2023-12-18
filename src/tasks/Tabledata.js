@@ -112,6 +112,11 @@ const UserList = ({ users }) => {
     const user = users.find((user) => user.id === id);
     console.log("user", user)
 
+    if (!user) {
+      console.error(`User with id ${id} not found.`);
+      return;
+    }
+  
     // Update the state with the user data
     setUpdatedata({
       id: user.id,
@@ -150,7 +155,7 @@ const UserList = ({ users }) => {
     const updatedUsers = sortedUsers.map((user) =>
       user.id === editId ? { ...user, ...updatedUser } : user
     );
-
+console.log("update",updatedUsers)
     // Set the updated user data in the state
     setSortedUsers(updatedUsers);
     localStorage.setItem('usersData', JSON.stringify(updatedUsers));
@@ -176,6 +181,23 @@ const UserList = ({ users }) => {
 
   };
 
+  // const handleCancel = () => {
+  //   // Reset the updatedata state to its initial values or clear it
+  //   setUpdatedata({
+  //     name: '',
+  //     username: '',
+  //     email: '',
+  //     Gender: '',
+  //     Age: '',
+  //     status: ''
+  //   });
+  
+  //   // You can also perform additional actions if needed
+  
+  //   // For example, you might want to close an edit form or modal
+  //   // setEditing(false);
+  // };
+  
   
   
   const handleCheckboxChange = (userId) => {
@@ -188,7 +210,7 @@ const UserList = ({ users }) => {
 
   return (
     <div className="user-list">
-      <h2>User List</h2>
+      <h2>Users List</h2>
       <input
         type="text"
         placeholder="Search..."
@@ -242,7 +264,7 @@ const UserList = ({ users }) => {
       <table className="custom-table">
         <thead>
           <tr>
-             
+          <th>Select</th>
             <th onClick={() => handleSort('id')}>ID</th>
             <th onClick={() => handleSort1('name')}>Name</th>
             <th onClick={() => handleSort('username')}>Username</th>
@@ -251,14 +273,14 @@ const UserList = ({ users }) => {
             <th onClick={() => handleSort('Age')}>Age</th>
             <th onClick={() => handleSort('status')}>Status</th>
             <th>Action</th>
-            <th>Select</th>
+            
           </tr>
         </thead>
         <tbody>
           {currentUsers.map((user) => (
             user.id === editId ?
               <tr>
-                
+                <td></td>
                 <td>{user.id}</td>
                 <td><input type="text" value={updatedata.name} onChange={e => setUpdatedata({ ...updatedata, name: e.target.value })} /></td>
                 <td><input type="text" value={updatedata.username} onChange={e => setUpdatedata({ ...updatedata, username: e.target.value })} /></td>
@@ -266,10 +288,19 @@ const UserList = ({ users }) => {
                 <td><input type="text" value={updatedata.Gender} onChange={e => setUpdatedata({ ...updatedata, Gender: e.target.value })} /></td>
                 <td><input type="text" value={updatedata.Age} onChange={e => setUpdatedata({ ...updatedata, Age: e.target.value })} /></td>
                 <td><input type="text" value={updatedata.status} onChange={e => setUpdatedata({ ...updatedata, status: e.target.value })} /></td>
-                <td><button onClick={handleUpdate} style={{ "backgroundColor": "green", "color": "white" }}>Update</button></td>
+                <td><button onClick={handleUpdate} className="button1">Update</button>
+               {/* <button onClick={()} className="button2">Cancel</button> */}
+               </td>
               </tr>
               :
               <tr key={user.id}>
+              <td>
+              <input
+                type="checkbox"
+                onChange={() => handleCheckboxChange(user.id)}
+                checked={selectedRow === user.id}
+              />
+            </td>
                 <td>{user.id}</td>
                 <td>{user.name}</td>
                 <td>{user.username}</td>
@@ -300,13 +331,7 @@ const UserList = ({ users }) => {
                 </div>
 
               </td>
-              <td>
-                <input
-                  type="checkbox"
-                  onChange={() => handleCheckboxChange(user.id)}
-                  checked={selectedRow === user.id}
-                />
-              </td>
+             
               </tr>
           ))}
         </tbody>

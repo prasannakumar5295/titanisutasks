@@ -31,12 +31,12 @@ const Sidebar = () => {
                     </li>
                     <li className="link">
                         <Link to="/Bmicalculator">
-                            <span style={{"color":"white"}}>Bmi Calculator</span>
+                            <span style={{"color":"white"}}>BmiCalculator</span>
                         </Link>
                     </li>
                     <li className="link">
                         <Link to="/TableData">
-                            <span style={{"color":"white"}}>Tabledata</span>
+                            <span style={{"color":"white"}}>UsersList</span>
                         </Link>
                     </li>
                 </ul>
